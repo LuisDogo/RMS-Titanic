@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from math import isnan
+from sklearn.model_selection import train_test_split
 
 def sex_encoding(sex):
     if sex == "male":
@@ -24,19 +25,19 @@ def cabin_encoding(cabin):
 
 # Universal Variables for the models to use
 
-t_size = .01
+t_size = .20
 rndom_seed = 40
 cols = ["Sex", "Pclass", "Parch"]
 
 # Data Reading
 
-train_df = pd.read_csv("data/train.csv")
+train = pd.read_csv("data/train.csv")
 test_df = pd.read_csv("data/test.csv")
 
 # Encoding Variables
 
-train_df.Sex = train_df.Sex.apply(sex_encoding)
-train_df.Embarked = train_df.Embarked.apply(embarked_encoding)
+train.Sex = train.Sex.apply(sex_encoding)
+train.Embarked = train.Embarked.apply(embarked_encoding)
 test_df.Sex = test_df.Sex.apply(sex_encoding)
 test_df.Embarked = test_df.Embarked.apply(embarked_encoding)
 
@@ -44,16 +45,18 @@ test_df.Embarked = test_df.Embarked.apply(embarked_encoding)
 # Handling Missing Values
 
 if "Embarked" in cols:
-    train_df = train_df.dropna(subset = ["Embarked"])
+    train = train.dropna(subset = ["Embarked"])
     test_df = test_df.dropna(subset = ["Embarked"])
 if "Age" in cols:
-    train_df = train_df.dropna(subset = ["Age"])
+    train = train.dropna(subset = ["Age"])
     test_df = test_df.dropna(subset = ["Age"])
 if "Cabin" in cols:
-    train_df.Cabin = train_df.Cabin.apply(cabin_encoding)
+    train.Cabin = train.Cabin.apply(cabin_encoding)
     test_df.Cabin = test_df.Cabin.apply(cabin_encoding)
 
-# Name change, Check later
+class_names = ["Survived", "Died"]
 
-train = train_df
-test = test_df
+# Split data
+
+X_train, X_test, y_train, y_test = train_test_split(train[cols], train.Survived, test_size = t_size, random_state = rndom_seed)
+
