@@ -10,5 +10,5 @@ Comparison of various models for classifying the survival of the passengers aboa
   on **cleaning.py**</li>
 </ul>
 
-!["Confusion matrix of different models"](imgs/confussion_matrix_eval1.jpg)
+!["Confusion matrix of different models"](imgs/confussion_matrix_eval1.png)
 
