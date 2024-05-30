@@ -10,6 +10,8 @@ Comparison of various models for classifying the survival of the passengers aboa
   on **cleaning.py**</li>
 </ul>
 
-Confusion Matrix for each model used:![img](imgs/confussion_matrix_eval1.png)
+Confusion Matrix for each model used:
+![img](imgs/confussion_matrix_eval1.png)
 
 ROC curve:
+![img](imgs/roc_curve.png)
